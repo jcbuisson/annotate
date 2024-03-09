@@ -1,7 +1,7 @@
 <template>
-   <div>
+   <div class="m-2">
       <template v-for="part of parts">
-         <span :class="{ 'bg-yellow-200': part.highlighted }" @mouseup="onMouseUp(part)" v-html="part.text"></span>
+         <span class="font-bold text-2xl" :class="{ 'bg-yellow-200': part.highlighted }" @mouseup="onMouseUp(part)" v-html="part.text"></span>
       </template>
    </div>
    <slot></slot>
@@ -35,7 +35,6 @@ const props = defineProps({
 let parts = ref([])
 
 onMounted(() => {
-   console.log('props.cle', props.cle)
    parts.value = useLocalStorage(props.cle, [
       {
          text: props.text,

@@ -1,10 +1,7 @@
 <template>
-   <div>
-      <template v-for="part of parts">
-         <span :class="{ 'bg-yellow-200': part.highlighted }" @mouseup="onMouseUp(part)" v-html="part.text"></span>
-      </template>
-   </div>
-   <slot></slot>
+   <template v-for="part of parts">
+      <span class="font-bold" :class="{ 'bg-yellow-200': part.highlighted }" @mouseup="onMouseUp(part)" v-html="part.text"></span>
+   </template>
 </template>
 
 <script setup>
@@ -35,7 +32,6 @@ const props = defineProps({
 let parts = ref([])
 
 onMounted(() => {
-   console.log('props.cle', props.cle)
    parts.value = useLocalStorage(props.cle, [
       {
          text: props.text,

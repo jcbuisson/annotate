@@ -1,13 +1,13 @@
 <template>
    <div class="w-full p-4 m-2">
-      <AnnotatedTitleBlock key="k1" text="Le système nerveux" />
-      <AnnotatedBlock key="k2" text="Le système nerveux est constitué de deux parties distinctes">
+      <AnnotatedTitleBlock cle="k1" text="Le système nerveux" />
+      <AnnotatedBlock cle="k2" text="Le système nerveux est constitué de deux parties distinctes">
          <ul>
             <li class="list-disc">
-               <AnnotatedBoldSpan key="k3" text="Axone fibre nerveuse" /> <AnnotatedSpan key="k4" text="longue et mince" />
+               <AnnotatedBoldSpan cle="k3" text="Axone fibre nerveuse" /> <AnnotatedSpan cle="k4" text="longue et mince" />
             </li>
             <li class="list-disc">
-               <AnnotatedSpan key="k5" text="Dendrites : branches des cellules nerveuses" />
+               <AnnotatedSpan cle="k5" text="Dendrites : branches des cellules nerveuses" />
             </li>
          </ul>
       </AnnotatedBlock>
