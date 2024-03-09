@@ -20,32 +20,20 @@ const props = defineProps({
    },
 })
 
-// const parts = ref([
-// {
-//       text: props.text,
-//       start: 0,
-//       end: props.text.length,
-//       highlighted: false,
-//    }
-// ])
-
-let parts = ref([])
-
-onMounted(() => {
-   parts.value = useLocalStorage(props.cle, [
-      {
-         text: props.text,
-         start: 0,
-         end: props.text.length,
-         highlighted: false,
-      }
-   ])
-})
+const parts = useLocalStorage(props.cle, [
+{
+      text: props.text,
+      start: 0,
+      end: props.text.length,
+      highlighted: false,
+   }
+])
 
 function onMouseUp(part) {
    const selection = window.getSelection()
    // selection must not be empty
    if (!selection || selection.rangeCount === 0) return
+   console.log('range count', selection.rangeCount)
    const range = selection.getRangeAt(0)
    if (range.startOffset === range.endOffset) return
 
