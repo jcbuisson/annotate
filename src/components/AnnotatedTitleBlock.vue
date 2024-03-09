@@ -10,6 +10,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useLocalStorage } from '@vueuse/core'
+import stringHash from 'string-hash'
 
 
 const props = defineProps({
@@ -23,7 +24,9 @@ const props = defineProps({
    },
 })
 
-const parts = useLocalStorage(props.cle, [
+const hashValue = stringHash(props.text)
+
+const parts = useLocalStorage(`part${hashValue}`, [
 {
       text: props.text,
       start: 0,
