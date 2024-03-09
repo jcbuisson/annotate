@@ -1,7 +1,10 @@
 <template>
-   <template v-for="part of parts">
-      <span :class="{ 'bg-yellow-200': part.highlighted }" @mouseup="onMouseUp(part)" v-html="part.text"></span>
-   </template>
+   <div>
+      <template v-for="part of parts">
+         <span :class="{ 'bg-yellow-200': part.highlighted }" @mouseup="onMouseUp(part)" v-html="part.text"></span>
+      </template>
+   </div>
+   <slot></slot>
 </template>
 
 <script setup>
@@ -16,14 +19,23 @@ const props = defineProps({
    },
 })
 
-const parts = useLocalStorage('annotated-parts', [
-   {
+const parts = ref([
+{
       text: props.text,
       start: 0,
       end: props.text.length,
       highlighted: false,
    }
 ])
+
+// const parts = useLocalStorage('annotated-parts', [
+//    {
+//       text: props.text,
+//       start: 0,
+//       end: props.text.length,
+//       highlighted: false,
+//    }
+// ])
 
 function onMouseUp(part) {
    const selection = window.getSelection()
