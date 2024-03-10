@@ -11,14 +11,16 @@
 
          <ul class="list-disc">
             <li class="ml-8">
-               <AnnotatedBlock type="bold-span" text="Axone :" /> <AnnotatedBlock type="span" text="fibre nerveuse longue et mince" />
+               <AnnotatedBlock type="bold-span" text="Axone :" /> <AnnotatedBlock type="span" text="fibre nerveuse longue et mince qui sort d’une cellule nerveuse et peut envoyer des messages sous forme d’impulsions électriques à d’autres cellules nerveuses et muscles" />
             </li>
             <li class="ml-8">
-               <AnnotatedBlock type="bold-span" text="Dendrites :" /> <AnnotatedBlock type="span" text="branches des " /> <AnnotatedBlock type="lexicon" text="cellules" link="cell" /> <AnnotatedBlock type="span" text="nerveuses" />
+               <AnnotatedBlock type="bold-span" text="Dendrites :" /> <AnnotatedBlock type="span" text="branches des " /> <AnnotatedBlock type="lexicon" text="cellules" link="cell" /> <AnnotatedBlock type="span" text=" nerveuses qui reçoivent les impulsions électriques" />
             </li>
          </ul>
       </AnnotatedBlock>
-   </div>
+
+      <AnnotatedBlock type="block" text="En général, les fibres nerveuses transmettent les influx électriques dans un seul sens : de l’axone d’une cellule nerveuse (également appelée neurone) vers les dendrites d’une autre cellule nerveuse. Au niveau du point de contact entre cellules nerveuses (synapses), l’axone sécrète de petites quantités de messagers chimiques (neurotransmetteurs). Les neurotransmetteurs stimulent les récepteurs des dendrites de la cellule nerveuse suivante pour produire un nouveau courant électrique. Les neurotransmetteurs qui transportent l’influx à travers des synapses diffèrent selon le type de fibres nerveuses. Certaines impulsions stimulent la cellule nerveuse suivante, tandis que d’autres l’inhibent." />
+</div>
 </template>
 
 <script setup>

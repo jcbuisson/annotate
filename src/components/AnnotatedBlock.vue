@@ -33,8 +33,9 @@
 
    <template v-if="type === 'lexicon'">
       <template v-for="part of parts">
-         <span class="font-medium text-blue-600 dark:text-blue-500 hover:underline" :class="{ 'bg-yellow-200': part.highlighted }"
+         <span class="font-medium text-red-600 underline hover:cursor-pointer" :class="{ 'bg-yellow-200': part.highlighted }"
             @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
+            @mousehover="onHover"
          ></span>
       </template>
    </template>
@@ -109,5 +110,9 @@ function onMouseUp(part) {
 }
 
 function onMouseDown(part) {
+}
+
+function onHover() {
+   console.log('hover')
 }
 </script>
