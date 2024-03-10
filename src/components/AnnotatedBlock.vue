@@ -71,7 +71,11 @@ const parts = useLocalStorage(`part${hashValue}`, [
    }
 ])
 
+let selectedPart
+
 function onMouseUp(part) {
+   if (selectedPart !== part) return
+
    const selection = window.getSelection()
    // selection must not be empty
    if (!selection || selection.rangeCount === 0) return
@@ -84,12 +88,40 @@ function onMouseUp(part) {
    const partIndex = parts.value.indexOf(part)
    if (range.startOffset === part.start) {
       // replace part by 2 sub-parts, the left one being highlighted
+      console.log('first', partIndex)
+      parts.value.splice(partIndex, 1, ...[
+         {
+            text: part.text.substring(range.startOffset, range.endOffset),
+            start: part.start + range.startOffset,
+            end: part.start + range.endOffset,
+            highlighted: true,
+         },
+         {
+            text: part.text.substring(range.endOffset, part.end),
+            start: part.start + range.endOffset,
+            end: part.end,
+         },
+      ])
    } else if (range.endOffset === part.end) {
       // replace part by 2 sub-parts, the right one being highlighted
+      console.log('last', partIndex)
+      parts.value.splice(partIndex, 1, ...[
+         {
+            text: part.text.substring(0, range.startOffset),
+            start: 0,
+            end: part.start + range.startOffset,
+         },
+         {
+            text: part.text.substring(range.startOffset, range.endOffset),
+            start: part.start + range.startOffset,
+            end: part.end,
+            highlighted: true,
+         },
+      ])
    } else {
       // replace part by 3 sub-parts, the middle one being highlighted
       parts.value.splice(partIndex, 1, ...[
-      {
+         {
             text: part.text.substring(0, range.startOffset),
             start: part.start,
             end: part.start + range.startOffset,
@@ -110,6 +142,7 @@ function onMouseUp(part) {
 }
 
 function onMouseDown(part) {
+   selectedPart = part
 }
 
 function onHover() {
