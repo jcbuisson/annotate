@@ -1,13 +1,20 @@
 <template>
    <div class="w-full p-4 m-2 rounded bg-slate-50">
-      <AnnotatedTitleBlock cle="k1" text="Présentation du système nerveux" />
-      <AnnotatedBlock cle="k2" text="Le système nerveux est constitué de deux parties distinctes">
+      <AnnotatedBlock type="title-block" text="Présentation du système nerveux">
+         <AnnotatedBlock type="span" text="Le système nerveux est constitué de deux parties distinctes : le système nerveux central (" />
+         <AnnotatedBlock type="lexicon" text="cerveau" />
+         <AnnotatedBlock type="span" text=" et " />
+         <AnnotatedBlock type="lexicon" text="moelle épinière" />
+         <AnnotatedBlock type="span" text=") et le " />
+         <AnnotatedBlock type="lexicon" text="système nerveux périphérique" />
+         <AnnotatedBlock type="span" text=" (nerfs sortant du cerveau et de la moelle épinière)." />
+
          <ul class="list-disc">
             <li class="ml-8">
-               <AnnotatedBoldSpan cle="k3" text="Axone :" /> <AnnotatedSpan cle="k4" text="fibre nerveuse longue et mince" />
+               <AnnotatedBlock type="bold-span" text="Axone :" /> <AnnotatedBlock type="span" text="fibre nerveuse longue et mince" />
             </li>
             <li class="ml-8">
-               <AnnotatedBoldSpan cle="k33" text="Dendrites :" /> <AnnotatedSpan cle="k5" text="branches des " /> <AnnotatedLexicon cle="k6" text="cellules" link="cell" /> <AnnotatedSpan cle="k7" text="nerveuses" />
+               <AnnotatedBlock type="bold-span" text="Dendrites :" /> <AnnotatedBlock type="span" text="branches des " /> <AnnotatedBlock type="lexicon" text="cellules" link="cell" /> <AnnotatedBlock type="span" text="nerveuses" />
             </li>
          </ul>
       </AnnotatedBlock>
@@ -16,8 +23,4 @@
 
 <script setup>
 import AnnotatedBlock from '/src/components/AnnotatedBlock.vue'
-import AnnotatedTitleBlock from '/src/components/AnnotatedTitleBlock.vue'
-import AnnotatedBoldSpan from '/src/components/AnnotatedBoldSpan.vue'
-import AnnotatedSpan from '/src/components/AnnotatedSpan.vue'
-import AnnotatedLexicon from '/src/components/AnnotatedLexicon.vue'
 </script>

@@ -1,9 +1,44 @@
 <template>
-   <div>
+   <div v-if="type === 'block'">
       <template v-for="part of parts">
-         <span :class="{ 'bg-yellow-200': part.highlighted }" @mouseup="onMouseUp(part)" v-html="part.text"></span>
+         <span :class="{ 'bg-yellow-200': part.highlighted }"
+            @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
+         ></span>
       </template>
    </div>
+
+   <div class="my-2" v-if="type === 'title-block'">
+      <template v-for="part of parts">
+         <span class="font-bold text-4xl" :class="{ 'bg-yellow-200': part.highlighted }"
+            @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
+         ></span>
+      </template>
+   </div>
+
+   <template v-if="type === 'bold-span'">
+      <template v-for="part of parts">
+         <span class="font-bold" :class="{ 'bg-yellow-200': part.highlighted }"
+            @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
+         ></span>
+      </template>
+   </template>
+
+   <template v-if="type === 'span'">
+      <template v-for="part of parts">
+         <span :class="{ 'bg-yellow-200': part.highlighted }"
+            @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
+         ></span>
+      </template>
+   </template>
+
+   <template v-if="type === 'lexicon'">
+      <template v-for="part of parts">
+         <span class="font-medium text-blue-600 dark:text-blue-500 hover:underline" :class="{ 'bg-yellow-200': part.highlighted }"
+            @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
+         ></span>
+      </template>
+   </template>
+
    <slot></slot>
 </template>
 
@@ -14,13 +49,13 @@ import stringHash from 'string-hash'
 
 
 const props = defineProps({
-   cle: {
-      type: String,
-      required: true
-   },
    text: {
       type: String,
       required: true
+   },
+   type: {
+      type: String,
+      default: 'block'
    },
 })
 
@@ -71,5 +106,8 @@ function onMouseUp(part) {
          },
       ])
    }
+}
+
+function onMouseDown(part) {
 }
 </script>
