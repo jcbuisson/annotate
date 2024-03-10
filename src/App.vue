@@ -73,5 +73,5 @@ import { mdiPencil } from '@mdi/js'
 
 import AnnotatedBlock from '/src/components/AnnotatedBlock.vue'
 
-const highlight = ref('orange')
+const highlight = ref('yellow')
 </script>
