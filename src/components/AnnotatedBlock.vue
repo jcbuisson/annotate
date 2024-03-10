@@ -3,6 +3,7 @@
       <template v-for="part of parts">
          <span :class="{ 'bg-yellow-200': part.highlighted }"
             @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
+            @touchend="onMouseUp(part)" @touchstart="onMouseDown(part)"
          ></span>
       </template>
    </div>
@@ -11,6 +12,7 @@
       <template v-for="part of parts">
          <span class="font-bold text-4xl" :class="{ 'bg-yellow-200': part.highlighted }"
             @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
+            @touchend="onMouseUp(part)" @touchstart="onMouseDown(part)"
          ></span>
       </template>
    </div>
@@ -19,6 +21,7 @@
       <template v-for="part of parts">
          <span class="font-bold" :class="{ 'bg-yellow-200': part.highlighted }"
             @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
+            @touchend="onMouseUp(part)" @touchstart="onMouseDown(part)"
          ></span>
       </template>
    </template>
@@ -27,6 +30,7 @@
       <template v-for="part of parts">
          <span :class="{ 'bg-yellow-200': part.highlighted }"
             @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
+            @touchend="onMouseUp(part)" @touchstart="onMouseDown(part)"
          ></span>
       </template>
    </template>
@@ -35,7 +39,7 @@
       <template v-for="part of parts">
          <span class="font-medium text-red-600 underline hover:cursor-pointer" :class="{ 'bg-yellow-200': part.highlighted }"
             @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
-            @mousehover="onHover"
+            @touchend="onMouseUp(part)" @touchstart="onMouseDown(part)"
          ></span>
       </template>
    </template>
@@ -148,9 +152,5 @@ function onMouseUp(part) {
 
 function onMouseDown(part) {
    selectedPart = part
-}
-
-function onHover() {
-   console.log('hover')
 }
 </script>
