@@ -1,7 +1,7 @@
 <template>
    <div class="my-2" v-if="type === 'block'">
       <template v-for="part of parts">
-         <span :class="{ 'bg-yellow-200': part.highlighted }"
+         <span :class="{ 'bg-yellow-200': part.highlight === 'yellow', 'bg-orange-200': part.highlight === 'orange', 'bg-purple-200': part.highlight === 'purple' }"
             @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
             @touchend="onMouseUp(part)" @touchstart="onMouseDown(part)"
          ></span>
@@ -10,7 +10,7 @@
 
    <div class="my-4" v-if="type === 'title-block'">
       <template v-for="part of parts">
-         <span class="font-bold text-4xl" :class="{ 'bg-yellow-200': part.highlighted }"
+         <span class="font-bold text-4xl" :class="{ 'bg-yellow-200': part.highlight === 'yellow', 'bg-orange-200': part.highlight === 'orange', 'bg-purple-200': part.highlight === 'purple' }"
             @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
             @touchend="onMouseUp(part)" @touchstart="onMouseDown(part)"
          ></span>
@@ -19,7 +19,7 @@
 
    <template v-if="type === 'bold-span'">
       <template v-for="part of parts">
-         <span class="font-bold" :class="{ 'bg-yellow-200': part.highlighted }"
+         <span class="font-bold" :class="{ 'bg-yellow-200': part.highlight === 'yellow', 'bg-orange-200': part.highlight === 'orange', 'bg-purple-200': part.highlight === 'purple' }"
             @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
             @touchend="onMouseUp(part)" @touchstart="onMouseDown(part)"
          ></span>
@@ -28,7 +28,7 @@
 
    <template v-if="type === 'span'">
       <template v-for="part of parts">
-         <span :class="{ 'bg-yellow-200': part.highlighted }"
+         <span :class="{ 'bg-yellow-200': part.highlight === 'yellow', 'bg-orange-200': part.highlight === 'orange', 'bg-purple-200': part.highlight === 'purple' }"
             @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
             @touchend="onMouseUp(part)" @touchstart="onMouseDown(part)"
          ></span>
@@ -37,10 +37,12 @@
 
    <template v-if="type === 'lexicon'">
       <template v-for="part of parts">
-         <span class="font-medium text-red-600 underline hover:cursor-pointer" :class="{ 'bg-yellow-200': part.highlighted }"
-            @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
-            @touchend="onMouseUp(part)" @touchstart="onMouseDown(part)"
-         ></span>
+         <div class="tooltip" data-tip="À suivre...">
+            <span class="font-medium text-red-600 underline hover:cursor-pointer" :class="{ 'bg-yellow-200': part.highlight === 'yellow', 'bg-orange-200': part.highlight === 'orange', 'bg-purple-200': part.highlight === 'purple' }"
+               @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
+               @touchend="onMouseUp(part)" @touchstart="onMouseDown(part)"
+            ></span>
+         </div>
       </template>
    </template>
 
@@ -63,8 +65,8 @@ const props = defineProps({
       default: 'block'
    },
    highlight: {
-      type: Boolean,
-      default: false
+      type: String,
+      default: 'yellow'
    },
 })
 
@@ -103,7 +105,7 @@ function onMouseUp(part) {
             text: part.text.substring(range.startOffset, range.endOffset),
             start: part.start + range.startOffset,
             end: part.start + range.endOffset,
-            highlighted: true,
+            highlight: props.highlight,
          },
          {
             text: part.text.substring(range.endOffset, part.end),
@@ -124,7 +126,7 @@ function onMouseUp(part) {
             text: part.text.substring(range.startOffset, range.endOffset),
             start: part.start + range.startOffset,
             end: part.end,
-            highlighted: true,
+            highlight: props.highlight,
          },
       ])
    } else {
@@ -139,7 +141,7 @@ function onMouseUp(part) {
             text: part.text.substring(range.startOffset, range.endOffset),
             start: part.start + range.startOffset,
             end: part.start + range.endOffset,
-            highlighted: true,
+            highlight: props.highlight,
          },
          {
             text: part.text.substring(range.endOffset, part.end),

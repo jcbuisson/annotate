@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mdi/js": "^7.4.47",
     "@vueuse/core": "^10.9.0",
     "string-hash": "^1.1.3",
     "vue": "^3.4.19"
