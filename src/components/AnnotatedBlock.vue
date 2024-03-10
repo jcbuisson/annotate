@@ -1,5 +1,5 @@
 <template>
-   <div v-if="type === 'block'">
+   <div class="my-2" v-if="type === 'block'">
       <template v-for="part of parts">
          <span :class="{ 'bg-yellow-200': part.highlighted }"
             @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
@@ -7,7 +7,7 @@
       </template>
    </div>
 
-   <div class="my-2" v-if="type === 'title-block'">
+   <div class="my-4" v-if="type === 'title-block'">
       <template v-for="part of parts">
          <span class="font-bold text-4xl" :class="{ 'bg-yellow-200': part.highlighted }"
             @mouseup="onMouseUp(part)" @mousedown="onMouseDown(part)" v-html="part.text"
@@ -58,6 +58,10 @@ const props = defineProps({
       type: String,
       default: 'block'
    },
+   highlight: {
+      type: Boolean,
+      default: false
+   },
 })
 
 const hashValue = stringHash(props.text)
@@ -74,6 +78,7 @@ const parts = useLocalStorage(`part${hashValue}`, [
 let selectedPart
 
 function onMouseUp(part) {
+   if (!props.highlight) return
    if (selectedPart !== part) return
 
    const selection = window.getSelection()
