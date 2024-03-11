@@ -12,6 +12,8 @@
     "@mdi/js": "^7.4.47",
     "@vueuse/core": "^10.9.0",
     "string-hash": "^1.1.3",
+    "vite-plugin-pwa": "^0.19.2",
+    "vite-plugin-top-level-await": "^1.4.1",
     "vue": "^3.4.19"
   },
   "devDependencies": {

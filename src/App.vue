@@ -65,15 +65,39 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { mdiPencil, mdiEraser } from '@mdi/js'
+import { useRegisterSW } from 'virtual:pwa-register/vue'
 
 import AnnotatedBlock from '/src/components/AnnotatedBlock.vue'
 
 const highlight = ref('yellow')
 
-// prevent copy
+
+/////////////////      PREVENT COPY EVERYWHERE     ////////////////
+
 onMounted(() => {
    document.addEventListener('copy', (event) => {
       event.preventDefault()
    })
 })
+
+/////////////////      AUTOMATIC VERSION UPDATE     ////////////////
+
+const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({
+   immediate: true,
+   onRegistered(r) {
+      console.log(`SW onRegistered: ${r}`)
+      r && setInterval(async() => {
+         console.log('Checking for sw update')
+         await r.update()
+         console.log('needRefresh', needRefresh.value)
+         if (needRefresh.value) {
+            // update app
+            console.log('updating app..!')
+            updateServiceWorker()
+         }
+
+      }, 20000 /* check every 20s */)
+   },
+})
+
 </script>
