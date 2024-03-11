@@ -77,20 +77,22 @@ const parts = useLocalStorage(`part${hashValue}`, [
       text: props.text,
       start: 0,
       end: props.text.length,
-      highlighted: false,
    }
 ])
+
+// document.addEventListener('selectionchange', (e) => {
+//    console.log('selectionchange')
+// })
 
 let selectedPart
 
 function onMouseUp(part) {
    if (!props.highlight) return
-   if (selectedPart !== part) return
+   if (selectedPart !== part) { console.log('outside', part); return; }
 
    const selection = window.getSelection()
    // selection must not be empty
    if (!selection || selection.rangeCount === 0) return
-   console.log('range count', selection.rangeCount)
    const range = selection.getRangeAt(0)
    if (range.startOffset === range.endOffset) return
 
@@ -99,7 +101,6 @@ function onMouseUp(part) {
    const partIndex = parts.value.indexOf(part)
    if (range.startOffset === part.start) {
       // replace part by 2 sub-parts, the left one being highlighted
-      console.log('first', partIndex)
       parts.value.splice(partIndex, 1, ...[
          {
             text: part.text.substring(range.startOffset, range.endOffset),
@@ -115,7 +116,6 @@ function onMouseUp(part) {
       ])
    } else if (range.endOffset === part.end) {
       // replace part by 2 sub-parts, the right one being highlighted
-      console.log('last', partIndex)
       parts.value.splice(partIndex, 1, ...[
          {
             text: part.text.substring(0, range.startOffset),
@@ -154,5 +154,34 @@ function onMouseUp(part) {
 
 function onMouseDown(part) {
    selectedPart = part
+
+   if (props.highlight === 'eraser' && part.highlight) {
+      console.log('erase', part)
+      selectedPart = null
+      const partIndex = parts.value.indexOf(part)
+      if (partIndex === 0) {
+         const after = parts.value[partIndex + 1]
+         parts.value.splice(partIndex, 2, {
+            text: part.text + after.text,
+            start: part.start,
+            end: after.end,
+         })
+      } else if (partIndex === parts.value.length - 1) {
+         const before = parts.value[partIndex - 1]
+         parts.value.splice(partIndex - 1, 2, {
+            text: before.text + part.text,
+            start: before.start,
+            end: part.end,
+         })
+      } else {
+         const before = parts.value[partIndex - 1]
+         const after = parts.value[partIndex + 1]
+         parts.value.splice(partIndex - 1, 3, {
+            text: before.text + part.text + after.text,
+            start: before.start,
+            end: after.end,
+         })
+      }
+   }
 }
 </script>
